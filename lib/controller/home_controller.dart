@@ -56,6 +56,7 @@ class HomeControllerImp extends HomeController {
 
   @override
   onChanged(int menuId, String value) {
+    qtyCtrls[menuId]?.text = value;
     final qty = int.tryParse(value) ?? 0;
     quantities[menuId] = qty;
     updatePanierItems();
