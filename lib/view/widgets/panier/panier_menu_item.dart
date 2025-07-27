@@ -90,7 +90,11 @@ class PanierMenuItem extends StatelessWidget {
                     height: 32,
                     width: 32,
                     child: IconButton(
-                      icon: const Icon(Icons.add, size: 20),
+                      icon: const Icon(
+                        Icons.add,
+                        size: 20,
+                        color: Colors.green,
+                      ),
                       onPressed: onAdd,
                       padding: EdgeInsets.zero,
                     ),
@@ -114,7 +118,11 @@ class PanierMenuItem extends StatelessWidget {
                     height: 32,
                     width: 32,
                     child: IconButton(
-                      icon: const Icon(Icons.remove, size: 20),
+                      icon: const Icon(
+                        Icons.remove,
+                        size: 20,
+                        color: Colors.red,
+                      ),
                       onPressed: onRemove,
                       padding: EdgeInsets.zero,
                     ),

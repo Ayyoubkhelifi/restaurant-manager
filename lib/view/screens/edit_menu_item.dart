@@ -23,7 +23,7 @@ class EditMenuItem extends StatelessWidget {
             icon: Icon(Icons.delete),
           ),
         ],
-        title: Text('Add Menu Item'),
+        title: Text('Edit Menu Item'),
       ),
       body: GetBuilder<EditMenuItemControllerImp>(
         builder:

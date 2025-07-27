@@ -13,7 +13,7 @@ class AddMenuItem extends StatelessWidget {
       AddMenuItemControllerImp(),
     );
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Menu Item')),
+      appBar: AppBar(title: Text('Add Menu Item')),
       body: GetBuilder<AddMenuItemControllerImp>(
         builder:
             (controller) => HandlingstatusrequestWithfailure(

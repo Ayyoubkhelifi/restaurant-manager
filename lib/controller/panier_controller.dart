@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:restaurant/controller/home_controller.dart';
 import 'package:restaurant/model/menu_item_model.dart';
 import 'package:restaurant/model/panier_item_model.dart';
 import 'package:restaurant/model/panier_model.dart';
@@ -19,6 +20,7 @@ abstract class PanierController extends GetxController {
 class PanierControllerImp extends PanierController {
   List<MenuItem> panierMenuItems = [];
   StatusRequest statusRequest = StatusRequest.success;
+  HomeControllerImp homeController = Get.find();
   double totalPrice = 0.0;
   double totalCost = 0.0;
   double totalRevenue = 0.0;
@@ -52,10 +54,14 @@ class PanierControllerImp extends PanierController {
 
   @override
   onChanged(int menuId, String value) {
+    if (value.trim().isEmpty) {
+      return;
+    }
     final qty = int.tryParse(value) ?? 0;
     quantities[menuId] = qty;
-    calcTotals();
+
     updatePanierItems();
+    homeController.onChanged(menuId, value);
   }
 
   @override
@@ -64,8 +70,9 @@ class PanierControllerImp extends PanierController {
     final updated = current + 1;
     quantities[menuId] = updated;
     qtyCtrls[menuId]?.text = '$updated';
-    calcTotals();
+
     updatePanierItems();
+    homeController.onAdd(menuId);
   }
 
   @override
@@ -75,8 +82,9 @@ class PanierControllerImp extends PanierController {
       final updated = current - 1;
       quantities[menuId] = updated;
       qtyCtrls[menuId]?.text = '$updated';
-      calcTotals();
+
       updatePanierItems();
+      homeController.onRemove(menuId);
     }
   }
 
@@ -144,6 +152,7 @@ class PanierControllerImp extends PanierController {
   }
 
   updatePanierItems() {
+    calcTotals();
     panierMenuItems =
         panierMenuItems.where((item) {
           final qty = quantities[item.id!] ?? 0;
